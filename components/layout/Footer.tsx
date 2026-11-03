@@ -29,6 +29,7 @@ export default function Footer() {
           <div>
             <span className="mono">Informations</span>
             <Link href="/mentions-legales">Mentions légales</Link>
+            <Link href="/politique-de-confidentialite">Politique de confidentialité</Link>
           </div>
         </div>
       </div>

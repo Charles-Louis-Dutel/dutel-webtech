@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { mailto, site } from "@/lib/site";
 
@@ -319,6 +320,11 @@ export default function ContactForm() {
         </button>
         <small>Protection anti-spam : Cloudflare Turnstile</small>
       </div>
+
+      <p className="form-legal">
+        Les informations saisies servent uniquement à répondre à votre demande. En savoir plus :{" "}
+        <Link href="/politique-de-confidentialite">politique de confidentialité</Link>.
+      </p>
 
       <div className={`form-status${status === "success" ? " ok" : ""}${status === "error" ? " ko" : ""}`} role="status" aria-live="polite">
         {SITE_KEY ? (

@@ -192,11 +192,23 @@ curl -i -X POST http://localhost:8788/api/contact \
 - Avant d'annoncer le formulaire comme opérationnel : effectuer un envoi réel en production et
   vérifier la réception sur `contact@dutel-webtech.fr` (et la réponse via « Répondre »).
 
+## Pages légales
+
+- `/mentions-legales` et `/politique-de-confidentialite`, sur un gabarit commun
+  (`components/legal/LegalPage.tsx`), liées depuis le pied de page et sous le formulaire.
+- Toutes les informations légales sont centralisées dans **`lib/legal.ts`**. Les valeurs inconnues
+  valent `null`, sont signalées par des commentaires `TODO(...)` et s'affichent comme
+  « À compléter », jamais comme une information inventée.
+- Les deux pages sont en `noindex` tant qu'elles ne sont pas complétées (`robots` dans chaque page).
+
 ## À compléter avant publication
 
-- Mentions légales (`app/mentions-legales/page.tsx`) : statut, SIRET, TVA, adresse, hébergeur,
-  paragraphe « Données personnelles » (conservation, sous-traitants Resend et Cloudflare, droits).
-  La page est en `noindex` tant qu'elle n'est pas complétée.
+- Informations d'identification dans `lib/legal.ts` (statut, SIRET, immatriculation, TVA, adresse,
+  téléphone), après immatriculation de l'activité.
+- Politique de confidentialité : durées de conservation, bases juridiques à valider, offre Resend,
+  localisation des données OVH, cookies observés en production, position sur Turnstile au regard
+  des recommandations de la CNIL (voir les `TODO` en tête de `app/politique-de-confidentialite/page.tsx`).
+- Accord de l'autrice pour les captures de sophiedutel-art.fr.
 - Configuration Resend (domaine, DNS, clé), Turnstile (widget, clés) et variables Cloudflare Pages.
 - Test d'envoi réel en production.
 - Retirer de `public/` les fichiers source inutilisés (`portrait.jpg`, `sophie-dutel-mobile.png`).
