@@ -282,15 +282,17 @@
     width: min(100%, 260px); aspect-ratio: 9 / 19.5; border-radius: 36px; border: 1px solid var(--rule-2);
     background: #fff; padding: 10px; box-shadow: 0 40px 80px -40px rgba(40, 30, 15, 0.35);
   }
+  /* Écran du téléphone : la capture couvre toute la surface (recadrage proportionnel, calé en haut). */
   .phone .screen {
-    height: 100%; border-radius: 27px; overflow: hidden;
-    background: repeating-linear-gradient(135deg, #ece7de 0 1px, transparent 1px 10px), #f6f3ee;
+    position: relative; display: block; height: 100%; padding: 0;
+    border-radius: 27px; overflow: hidden; background: #fff;
   }
-  .phone img {
-    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  .phone .screen img {
+    position: absolute; inset: 0; width: 100%; height: 100%; max-width: none;
+    object-fit: cover; object-position: top center;
     transition: transform 1.4s var(--ease);
   }
-  .shot:hover .phone img { transform: scale(1.015); }
+  .shot:hover .phone .screen img { transform: scale(1.015); }
 
   /* ───────────── Services ───────────── */
   .sec { padding: clamp(88px, 11vw, 176px) 0; }
