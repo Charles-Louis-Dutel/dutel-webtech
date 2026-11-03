@@ -99,12 +99,21 @@ export default function Realisation() {
             note="Mise en page en mosaïque"
             sizes="(max-width: 680px) 92vw, 66vw"
           />
-          <figure className="case-f4 rv">
-            {/* Ressource manquante : capture mobile réelle de sophiedutel-art.fr à fournir. */}
+          <figure className="shot case-f4 rv">
             <div className="phone">
-              <div>
-                Capture mobile
-                <br />à fournir
+              <div className="screen">
+                {/* Capture 750 × 1508 : recadrage « cover » calé en haut (≈ 6 % des marges latérales). */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/realisation/sophie-dutel-mobile-480.webp"
+                  srcSet="/images/realisation/sophie-dutel-mobile-480.webp 480w, /images/realisation/sophie-dutel-mobile-750.webp 750w"
+                  sizes="240px"
+                  alt="Capture de la version mobile de sophiedutel-art.fr : signature, menu et peintures de paysages présentées en colonne"
+                  width={750}
+                  height={1508}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
             <figcaption className="cap mono" style={{ width: "min(100%, 260px)" }}>
