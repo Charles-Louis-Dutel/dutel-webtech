@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import LegalPage, { Todo, Value } from "@/components/legal/LegalPage";
+import LegalPage, { Row } from "@/components/legal/LegalPage";
 import { legal } from "@/lib/legal";
 
 export const metadata: Metadata = {
@@ -18,12 +18,13 @@ const mail = <a href={`mailto:${p.email}`}>{p.email}</a>;
 /*
  * Points nécessitant une décision ou une vérification (voir aussi lib/legal.ts) :
  * - TODO(bases-juridiques) : valider les bases juridiques proposées (intérêt légitime, mesures précontractuelles).
- * - TODO(conservation-*) : fixer les durées de conservation.
+ * - TODO(conservation-projets) : fixer la durée de conservation des échanges qui aboutissent à une collaboration.
  * - TODO(turnstile-consentement) : confirmer, au regard des lignes directrices de la CNIL sur les CAPTCHA,
  *   que Turnstile peut fonctionner sans consentement (Cloudflare réutilise aussi les signaux en tant que
  *   responsable de traitement pour améliorer sa détection).
  * - TODO(cookies-production) : contrôler les cookies réellement déposés en production (paramètres de la zone
- *   Cloudflare, Bot Fight Mode, Web Analytics) et mettre à jour la section « Cookies et traceurs ».
+ *   Cloudflare, Bot Fight Mode, Web Analytics) et préciser la section « Cookies et autres traceurs ».
+ * - TODO(resend-offre) : confirmer la durée de conservation de Resend selon l'offre souscrite.
  * - TODO(ovh-localisation) : vérifier la localisation des données de la messagerie OVH Zimbra.
  * - TODO(turnstile-preclearance) : conserver l'option « pre-clearance » désactivée sur le widget Turnstile
  *   (tableau de bord Cloudflare), sinon mettre à jour la section « Cookies et autres traceurs ».
@@ -35,7 +36,6 @@ export default function PolitiqueConfidentialite() {
       eyebrow="Données personnelles"
       title="Politique de confidentialité"
       related={{ href: "/mentions-legales", label: "Mentions légales" }}
-      notice="Certaines informations de cette page seront complétées avant le lancement de l'activité commerciale."
     >
       <section aria-labelledby="pc-intro">
         <h2 id="pc-intro">En bref</h2>
@@ -49,23 +49,14 @@ export default function PolitiqueConfidentialite() {
 
       <section aria-labelledby="pc-responsable">
         <h2 id="pc-responsable">1. Responsable du traitement</h2>
+        <p>
+          Le responsable du traitement est {p.name}, personne physique, qui édite ce site sous le nom{" "}
+          {legal.siteName}. Pour toute question relative à vos données, vous pouvez lui écrire à {mail}.
+        </p>
         <dl>
-          <div>
-            <dt>Responsable</dt>
-            <dd>
-              {p.name} ({p.tradeName})
-            </dd>
-          </div>
-          <div>
-            <dt>Adresse</dt>
-            <dd>
-              <Value value={p.address} todo="adresse de domiciliation" />
-            </dd>
-          </div>
-          <div>
-            <dt>Contact</dt>
-            <dd>{mail}</dd>
-          </div>
+          <Row label="Responsable" value={p.name} />
+          <Row label="Adresse" value={p.address} />
+          <Row label="Contact" value={mail} />
         </dl>
       </section>
 
@@ -161,40 +152,36 @@ export default function PolitiqueConfidentialite() {
 
       <section aria-labelledby="pc-conservation">
         <h2 id="pc-conservation">5. Durées de conservation</h2>
+        <h3>Conservation par le responsable du traitement</h3>
         <dl>
-          <div>
-            <dt>Messages reçus</dt>
-            <dd>
-              <Value value={legal.privacy.retentionMessages} todo="durée de conservation des messages" />
-            </dd>
-          </div>
-          <div>
-            <dt>Échanges sans suite</dt>
-            <dd>
-              <Value
-                value={legal.privacy.retentionProspects}
-                todo="durée de conservation des échanges n'ayant pas abouti"
-              />
-            </dd>
-          </div>
-          <div>
-            <dt>Copie chez Resend</dt>
-            <dd>
-              {legal.privacy.resendRetentionNote} <Todo>à confirmer selon l&apos;offre souscrite</Todo>
-            </dd>
-          </div>
-          <div>
-            <dt>Limitation des envois</dt>
-            <dd>
-              L&apos;adresse IP utilisée pour limiter les envois successifs est gardée temporairement dans la
-              mémoire du serveur et n&apos;est prise en compte que sur une fenêtre de 10 minutes ; elle
-              n&apos;est enregistrée dans aucune base de données.
-            </dd>
-          </div>
-          <div>
-            <dt>Données de sécurité et d&apos;hébergement</dt>
-            <dd>Conservées par Cloudflare selon ses propres politiques.</dd>
-          </div>
+          <Row
+            label="Demandes sans suite"
+            value={`Les messages reçus via le formulaire et les échanges qui n'aboutissent pas à une collaboration sont conservés ${legal.privacy.retentionWithoutFollowUp}, puis supprimés.`}
+          />
+          <Row label="Projets engagés" value={legal.privacy.retentionProjects} />
+          <Row
+            label="Limitation des envois"
+            value="L'adresse IP utilisée pour limiter les envois successifs est gardée temporairement dans la mémoire du serveur et n'est prise en compte que sur une fenêtre de 10 minutes ; elle n'est enregistrée dans aucune base de données."
+          />
+        </dl>
+        <h3>Conservations techniques propres aux prestataires</h3>
+        <p>
+          Ces durées sont fixées par les prestataires eux-mêmes et ne dépendent pas de la durée indiquée
+          ci-dessus.
+        </p>
+        <dl>
+          <Row
+            label="Resend"
+            value="Conserve les contenus et journaux des emails transmis pendant une durée qui dépend de l'offre souscrite ; sa documentation indique 30 jours pour les offres Free, Pro et Scale."
+          />
+          <Row
+            label="Cloudflare"
+            value="Conserve les données de connexion, de sécurité et les signaux Turnstile selon ses propres politiques."
+          />
+          <Row
+            label={legal.ovh.brand}
+            value="Héberge la messagerie : les messages y restent jusqu'à leur suppression par le responsable du traitement, dans les conditions du service de messagerie."
+          />
         </dl>
       </section>
 
@@ -216,8 +203,8 @@ export default function PolitiqueConfidentialite() {
           </li>
         </ul>
         <p>
-          Localisation des données de la messagerie OVH :{" "}
-          <Value value={legal.privacy.ovhDataLocation} todo="à vérifier auprès d'OVHcloud" />
+          La messagerie est fournie par {legal.ovh.name}, société établie en France.
+          {legal.privacy.ovhDataLocation ? ` ${legal.privacy.ovhDataLocation}` : null}
         </p>
       </section>
 
@@ -271,8 +258,10 @@ export default function PolitiqueConfidentialite() {
           est configuré sans pré-autorisation : Turnstile ne dépose donc pas le cookie cf_clearance.
         </p>
         <p>
-          {/* TODO(cookies-production) : remplacer ce repère par le résultat du contrôle en production. */}
-          <Todo>liste des cookies éventuellement déposés par l&apos;infrastructure Cloudflare, à vérifier après mise en ligne</Todo>
+          {/* TODO(cookies-production) : préciser ce paragraphe après contrôle des cookies en production. */}
+          Selon ses réglages de sécurité, l&apos;infrastructure de Cloudflare peut déposer des cookies
+          techniques destinés à la protection du site contre les robots ; ils sont décrits dans la politique
+          relative aux cookies de Cloudflare.
         </p>
         <p>
           Pour plus d&apos;informations, consultez la politique de confidentialité de Turnstile publiée par

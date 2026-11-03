@@ -196,19 +196,23 @@ curl -i -X POST http://localhost:8788/api/contact \
 
 - `/mentions-legales` et `/politique-de-confidentialite`, sur un gabarit commun
   (`components/legal/LegalPage.tsx`), liées depuis le pied de page et sous le formulaire.
-- Toutes les informations légales sont centralisées dans **`lib/legal.ts`**. Les valeurs inconnues
-  valent `null`, sont signalées par des commentaires `TODO(...)` et s'affichent comme
-  « À compléter », jamais comme une information inventée.
+- Toutes les informations légales sont centralisées dans **`lib/legal.ts`**. Les champs inconnus
+  valent `null` et **ne sont pas affichés** ; ils sont annotés `TODO(...)`. Les champs liés à une
+  future immatriculation (statut, SIRET, RNE, TVA) s'afficheront automatiquement une fois remplis.
+- `missingRequiredInfo()` liste les informations exigées par la loi encore absentes ; `npm run build`
+  affiche un avertissement tant qu'elles manquent.
 - Les deux pages sont en `noindex` tant qu'elles ne sont pas complétées (`robots` dans chaque page).
 
 ## À compléter avant publication
 
-- Informations d'identification dans `lib/legal.ts` (statut, SIRET, immatriculation, TVA, adresse,
-  téléphone), après immatriculation de l'activité.
-- Politique de confidentialité : durées de conservation, bases juridiques à valider, offre Resend,
-  localisation des données OVH, cookies observés en production, position sur Turnstile au regard
-  des recommandations de la CNIL (voir les `TODO` en tête de `app/politique-de-confidentialite/page.tsx`).
-- Accord de l'autrice pour les captures de sophiedutel-art.fr.
-- Configuration Resend (domaine, DNS, clé), Turnstile (widget, clés) et variables Cloudflare Pages.
-- Test d'envoi réel en production.
+- **Mentions légales (obligatoire)** : adresse et téléphone de l'éditeur dans `lib/legal.ts`. Sans
+  eux, les mentions légales ne peuvent pas être considérées comme conformes. Après création de
+  l'entreprise : statut (mention « EI »), SIRET, immatriculation, TVA.
+- Politique de confidentialité : durée de conservation des échanges liés à un projet engagé,
+  validation des bases juridiques, offre Resend, localisation des données OVH, cookies observés en
+  production, position sur Turnstile au regard des recommandations de la CNIL (voir les `TODO` en
+  tête de `app/politique-de-confidentialite/page.tsx`).
+- Accord écrit de l'autrice pour les captures de sophiedutel-art.fr.
+- Configuration Resend (domaine, DNS, clé), Turnstile (widget, clés) et variables Cloudflare Pages,
+  puis test d'envoi réel en production.
 - Retirer de `public/` les fichiers source inutilisés (`portrait.jpg`, `sophie-dutel-mobile.png`).

@@ -2,16 +2,16 @@
  * Informations légales du site — source unique pour les mentions légales et la
  * politique de confidentialité.
  *
- * ⚠️  À COMPLÉTER AVANT TOUTE PUBLICATION COMMERCIALE
+ * Situation (novembre 2026) : Dutel Web & Tech est un projet professionnel porté
+ * par Charles-Louis Dutel, personne physique. Aucune entreprise n'est encore
+ * créée : pas de SIRET, pas de statut, pas de numéro de TVA. Ne rien inventer et
+ * ne pas indiquer « en cours d'immatriculation ».
  *
- * Les valeurs `null` ne sont jamais présentées comme des informations réelles :
- * les pages affichent à leur place un repère « À compléter ». Ne rien inventer :
- * renseigner uniquement des informations officielles (avis de situation INSEE,
- * extrait RNE, etc.).
- *
- * Contexte (novembre 2026) : l'activité n'est pas encore immatriculée. Aucun
- * numéro SIRET n'est attribué. Ne pas indiquer « en cours d'immatriculation »
- * tant qu'aucune démarche n'a été engagée.
+ * Affichage : un champ `null` n'est pas affiché sur le site (pas de liste de
+ * rubriques « À compléter » visibles). Les champs exigés par la loi et encore
+ * absents sont listés par `missingRequiredInfo()`, signalés pendant le build et
+ * documentés dans le README : leur absence empêche de considérer les mentions
+ * légales comme conformes.
  */
 
 export type Maybe = string | null;
@@ -20,30 +20,30 @@ export const legal = {
   /** Date de dernière mise à jour affichée sur les deux pages. */
   lastUpdated: "3 novembre 2026",
 
+  /** Nom du site (et nom commercial envisagé). */
+  siteName: "Dutel Web & Tech",
+  siteDomain: "dutel-webtech.fr",
+
   publisher: {
-    /** Personne physique éditrice du site (connu). */
+    /** Personne physique éditrice du site et responsable du traitement. */
     name: "Charles-Louis Dutel",
-    /** Nom commercial envisagé (connu). */
-    tradeName: "Dutel Web & Tech",
-    /** Adresse de contact (connu). */
     email: "contact@dutel-webtech.fr",
 
-    // TODO(statut) : statut professionnel définitif après immatriculation
-    // (par exemple entrepreneur individuel, avec la mention « EI » ou
-    // « entrepreneur individuel » accolée au nom).
+    // ── Obligatoires pour un éditeur personne physique agissant à titre professionnel
+    //    (LCEN, art. 1-1 ; anciennement art. 6, III). À renseigner avant publication.
+    // TODO(adresse) : adresse du domicile ou de domiciliation. Ne pas inventer.
+    address: null as Maybe,
+    // TODO(telephone) : numéro de téléphone. Ne pas inventer.
+    phone: null as Maybe,
+
+    // ── À renseigner après la création de l'entreprise (affichés seulement s'ils sont remplis).
+    // TODO(statut) : par exemple entrepreneur individuel, avec la mention « EI » accolée au nom.
     status: null as Maybe,
-    // TODO(siret) : numéro SIRET attribué par l'INSEE après immatriculation.
+    // TODO(siret) : numéro SIRET attribué par l'INSEE.
     siret: null as Maybe,
     // TODO(rne) : immatriculation au Registre national des entreprises, si applicable.
     registration: null as Maybe,
-    // TODO(adresse) : adresse de domiciliation ou de domicile (obligatoire pour
-    // un éditeur personne physique exerçant à titre professionnel).
-    address: null as Maybe,
-    // TODO(telephone) : numéro de téléphone (exigé par la LCEN pour un éditeur
-    // personne physique exerçant à titre professionnel).
-    phone: null as Maybe,
-    // TODO(tva) : numéro de TVA intracommunautaire, ou mention applicable en
-    // franchise en base (à confirmer selon la situation fiscale).
+    // TODO(tva) : numéro de TVA intracommunautaire, ou mention de franchise applicable.
     vat: null as Maybe,
   },
 
@@ -51,9 +51,8 @@ export const legal = {
   publicationDirector: "Charles-Louis Dutel",
 
   /**
-   * Hébergeur. Coordonnées vérifiées le 3 novembre 2026 : adresse et téléphone
-   * déclarés par Cloudflare, Inc. auprès de la SEC (formulaire EDGAR, 2024).
-   * À revérifier avant publication.
+   * Hébergeur. Coordonnées vérifiées le 3 novembre 2026 (adresse et téléphone
+   * déclarés par Cloudflare, Inc. auprès de la SEC). À revérifier avant publication.
    */
   host: {
     name: "Cloudflare, Inc.",
@@ -69,25 +68,27 @@ export const legal = {
    */
   ovh: {
     name: "OVH SAS",
+    brand: "OVHcloud",
     address: "2 rue Kellermann, 59100 Roubaix, France",
     registration: "RCS Lille Métropole 424 761 419",
     website: "https://www.ovhcloud.com",
   },
 
   privacy: {
-    // TODO(conservation-messages) : durée de conservation des messages reçus
-    // dans la messagerie (décision du responsable du traitement).
-    retentionMessages: null as Maybe,
-    // TODO(conservation-prospects) : durée de conservation des échanges qui
-    // n'aboutissent pas à une collaboration (décision à prendre).
-    retentionProspects: null as Maybe,
-    // TODO(resend-offre) : la documentation Resend indique une conservation des
-    // données d'emails et journaux de 30 jours pour les offres Free, Pro et
-    // Scale. À confirmer selon l'offre souscrite.
-    resendRetentionNote:
-      "D'après la documentation de Resend, les contenus et journaux d'emails sont conservés 30 jours sur ses offres Free, Pro et Scale.",
-    // TODO(ovh-localisation) : vérifier la localisation des données de la
-    // messagerie OVH Zimbra dans le contrat ou l'espace client OVHcloud.
+    /** Décision du responsable du traitement (novembre 2026). */
+    retentionWithoutFollowUp: "12 mois après le dernier échange",
+    // TODO(conservation-projets) : durée de conservation des échanges qui aboutissent à une
+    // collaboration (durée de la relation, puis obligations comptables et fiscales applicables).
+    retentionProjects: null as Maybe,
+    // TODO(ovh-localisation) : vérifier la localisation des données de la messagerie OVH Zimbra.
     ovhDataLocation: null as Maybe,
   },
 } as const;
+
+/** Informations exigées par la loi qui manquent encore (pour le build et le README). */
+export function missingRequiredInfo(): string[] {
+  const missing: string[] = [];
+  if (!legal.publisher.address) missing.push("adresse de l'éditeur");
+  if (!legal.publisher.phone) missing.push("téléphone de l'éditeur");
+  return missing;
+}

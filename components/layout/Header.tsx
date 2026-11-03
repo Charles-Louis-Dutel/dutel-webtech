@@ -30,9 +30,10 @@ export default function Header() {
   return (
     <header className={`hdr${scrolled || open ? " scrolled" : ""}`}>
       <div className="wrap nav">
-        <Link className="brand" href="/" aria-label="Dutel Web & Tech — accueil">
-          <span className="w">Dutel</span>
-          <span className="t">Web &amp; Tech</span>
+        {/* Nom accessible = texte visible (« Dutel Web & Tech ») + précision « accueil » pour les lecteurs d'écran. */}
+        <Link className="brand" href="/">
+          <span className="w">Dutel</span> <span className="t">Web &amp; Tech</span>
+          <span className="sr-only-text"> — accueil</span>
         </Link>
 
         <nav aria-label="Navigation principale">

@@ -228,7 +228,11 @@
   .js .hv.in .axis.fade { opacity: 0.7; }
 
   /* ───────────── Réalisation ───────────── */
-  .realisation { background: var(--stone); padding: clamp(80px, 10vw, 160px) 0; }
+  .realisation {
+    background: var(--stone); padding: clamp(80px, 10vw, 160px) 0;
+    /* Gris légèrement plus foncé sur fond pierre : contraste 4,6:1 (WCAG AA), contre 4,36:1. */
+    --muted: #67615a;
+  }
   .case-head { align-items: end; margin-bottom: clamp(48px, 6vw, 88px); row-gap: 32px; }
   .case-head h2 { grid-column: 1 / 9; font-size: clamp(64px, 11vw, 196px); line-height: 0.85; letter-spacing: -0.035em; }
   .case-head h2 em {

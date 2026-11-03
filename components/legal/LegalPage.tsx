@@ -3,14 +3,19 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { legal, type Maybe } from "@/lib/legal";
 
-/** Repère visible pour une information pas encore disponible (jamais une fausse valeur). */
-export function Todo({ children }: { children: React.ReactNode }) {
-  return <span className="todo">[À compléter — {children}]</span>;
-}
-
-/** Affiche la valeur si elle est connue, sinon un repère « À compléter ». */
-export function Value({ value, todo }: { value: Maybe; todo: string }) {
-  return value ? <>{value}</> : <Todo>{todo}</Todo>;
+/**
+ * Ligne d'une liste de définitions, affichée uniquement si la valeur est connue.
+ * Les informations manquantes ne sont pas affichées : elles sont suivies dans
+ * lib/legal.ts (TODO et `missingRequiredInfo`).
+ */
+export function Row({ label, value }: { label: string; value: Maybe | React.ReactNode }) {
+  if (value === null || value === undefined || value === "") return null;
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
 }
 
 type Props = {
