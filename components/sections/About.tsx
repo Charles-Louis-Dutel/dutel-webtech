@@ -14,13 +14,17 @@ export default function About() {
           Un interlocuteur unique, <em>du premier échange à la mise en ligne.</em>
         </h2>
         <div className="g about-g">
-          {/* Ressource manquante : photo professionnelle (format 4:5). */}
-          <div
-            className="portrait rv"
-            role="img"
-            aria-label="Emplacement réservé pour une future photo professionnelle"
-          >
-            <span aria-hidden="true">Photo professionnelle — à venir</span>
+          <div className="portrait rv">
+            {/* Photo d'origine recadrée en 4:5 (bandes noires retirées, visage centré), sans retouche. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/about/charles-louis-dutel.webp"
+              alt="Portrait de Charles-Louis Dutel"
+              width={550}
+              height={688}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div className="about-t rv">
             <p>

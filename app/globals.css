@@ -329,7 +329,7 @@
     background: repeating-linear-gradient(135deg, #e3dcd0 0 1px, transparent 1px 10px), var(--stone);
     display: grid; place-items: center; position: relative;
   }
-  .portrait span { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
   .portrait::before, .portrait::after { content: ""; position: absolute; width: 18px; height: 18px; border: 1px solid var(--ink); }
   .portrait::before { top: -8px; left: -8px; border-right: 0; border-bottom: 0; }
   .portrait::after { bottom: -8px; right: -8px; border-left: 0; border-top: 0; }
