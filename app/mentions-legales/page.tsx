@@ -105,11 +105,14 @@ export default function MentionsLegales() {
             <section aria-labelledby="ml-donnees">
               <h2 id="ml-donnees">Données personnelles</h2>
               <p>
-                Le site ne dépose pas de cookie et ne collecte aucune donnée via un formulaire en ligne :
-                les demandes de contact passent par votre messagerie électronique.{" "}
+                Les informations saisies dans le formulaire de contact (nom, adresse email et message)
+                sont transmises par email à {site.name} afin de répondre à votre demande. L&apos;envoi est
+                assuré par le service Resend, et le formulaire est protégé contre le spam par Cloudflare
+                Turnstile.{" "}
                 <Todo>
-                  politique de conservation des emails, droits des personnes, à mettre à jour si une
-                  solution d&apos;envoi ou de mesure d&apos;audience est ajoutée
+                  base légale, durée de conservation des messages, sous-traitants (Resend, Cloudflare) et
+                  éventuels transferts hors de l&apos;Union européenne, droits des personnes et contact
+                  associé, cookies ou stockage éventuellement utilisés par Turnstile
                 </Todo>
               </p>
             </section>

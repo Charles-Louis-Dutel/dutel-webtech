@@ -399,6 +399,22 @@
   .f input::placeholder, .f textarea::placeholder { color: #8a8276; }
   .fs { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 28px; }
   .fs small { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  /* États du formulaire */
+  .f.invalid { border-color: var(--acc); }
+  .f.invalid label { color: var(--acc); }
+  .fe { grid-column: 2; margin-top: calc(-1 * var(--gap) - 6px); padding-bottom: 14px; font-size: 14px; color: var(--acc); }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .ts { margin-top: 20px; }
+  .ts:empty { display: none; }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-ink:disabled:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .btn:disabled:hover .a { transform: none; }
+  .form-status { margin-top: 20px; font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 52ch; }
+  .form-status:empty { display: none; }
+  .form-status.ok { color: var(--ink); display: flex; gap: 10px; align-items: baseline; }
+  .form-status.ok::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--acc); transform: translateY(-2px); }
+  .form-status.ko { color: var(--acc); }
+  .form-status a { border-bottom: 1px solid currentColor; }
 
   /* ───────────── Pied de page ───────────── */
   .ftr { background: var(--ink); color: #c2baac; padding: clamp(56px, 6vw, 96px) 0 28px; overflow: hidden; }
@@ -499,6 +515,7 @@
     .f { grid-template-columns: 1fr; gap: 0; }
     .f label { padding: 16px 0 0; }
     .f input, .f textarea { padding: 8px 0 16px; }
+    .fe { grid-column: 1; margin-top: -6px; }
     .fi { grid-template-columns: 1fr 1fr; row-gap: 24px; }
     .hc-svc { grid-template-columns: 1fr; gap: 0; }
     .hc-svc li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
