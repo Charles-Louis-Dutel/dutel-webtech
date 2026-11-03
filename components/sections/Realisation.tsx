@@ -17,12 +17,11 @@ export default function Realisation() {
     <section
       id="realisation"
       className="realisation"
-      data-folio="01"
-      data-name="Réalisation"
+      data-folio="Réalisation"
       aria-labelledby="case-title"
     >
       <div className="wrap">
-        <SectionHead n="01" label="Réalisation" aside="Étude de cas" />
+        <SectionHead label="Réalisation" aside="Étude de cas" />
         <div className="g case-head">
           <h2 id="case-title" className="rv">
             Sophie Dutel <em>Artiste peintre</em>

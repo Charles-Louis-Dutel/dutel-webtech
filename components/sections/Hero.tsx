@@ -8,7 +8,7 @@ const prestations = [
 
 export default function Hero() {
   return (
-    <section className="hc" data-folio="00" data-name="Accueil" aria-labelledby="hero-title">
+    <section className="hc" data-folio="Accueil" aria-labelledby="hero-title">
       <div className="wrap">
         <div className="g hc-g">
           <div className="hc-l">
@@ -41,7 +41,6 @@ export default function Hero() {
         <ul className="hc-svc rv" aria-label="Prestations">
           {prestations.map((p, i) => (
             <li key={p} className={i === 0 ? "on" : undefined}>
-              <span className="mono">{String(i + 1).padStart(2, "0")}</span>
               <a href="#services">{p}</a>
             </li>
           ))}

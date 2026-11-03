@@ -10,10 +10,10 @@ export const site = {
 
 export const mailto = `mailto:${site.email}`;
 
-/** Liens de navigation principale, dans l'ordre et avec la numérotation de la maquette. */
+/** Liens de navigation principale. */
 export const navLinks = [
-  { href: "/#realisation", label: "Réalisation", n: "01" },
-  { href: "/#services", label: "Services", n: "02" },
-  { href: "/#apropos", label: "À propos", n: "03" },
-  { href: "/#contact", label: "Contact", n: "05" },
+  { href: "/#realisation", label: "Réalisation" },
+  { href: "/#services", label: "Services" },
+  { href: "/#apropos", label: "À propos" },
+  { href: "/#contact", label: "Contact" },
 ] as const;

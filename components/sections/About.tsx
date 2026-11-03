@@ -5,12 +5,11 @@ export default function About() {
     <section
       id="apropos"
       className="sec apropos"
-      data-folio="03"
-      data-name="À propos"
+      data-folio="À propos"
       aria-labelledby="about-title"
     >
       <div className="wrap">
-        <SectionHead n="03" label="À propos" aside="Charles-Louis Dutel" />
+        <SectionHead label="À propos" aside="Charles-Louis Dutel" />
         <h2 id="about-title" className="about-q rv">
           Un interlocuteur unique, <em>du premier échange à la mise en ligne.</em>
         </h2>

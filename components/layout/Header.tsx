@@ -4,28 +4,12 @@ import Link from "next/link";
 import { useEffect, useId, useState, useSyncExternalStore } from "react";
 import { navLinks } from "@/lib/site";
 
-const clockFormat = new Intl.DateTimeFormat("fr-FR", {
-  hour: "2-digit",
-  minute: "2-digit",
-  timeZone: "Europe/Paris",
-});
-
-function subscribeClock(onChange: () => void) {
-  const id = window.setInterval(onChange, 30_000);
-  return () => window.clearInterval(id);
-}
-
 function subscribeScroll(onChange: () => void) {
   window.addEventListener("scroll", onChange, { passive: true });
   return () => window.removeEventListener("scroll", onChange);
 }
 
 export default function Header() {
-  const clock = useSyncExternalStore(
-    subscribeClock,
-    () => `Reims · ${clockFormat.format(new Date())}`,
-    () => "Reims",
-  );
   const scrolled = useSyncExternalStore(
     subscribeScroll,
     () => window.scrollY > 8,
@@ -55,19 +39,13 @@ export default function Header() {
           <ul>
             {navLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href}>
-                  {l.label}
-                  <sup>{l.n}</sup>
-                </Link>
+                <Link href={l.href}>{l.label}</Link>
               </li>
             ))}
           </ul>
         </nav>
 
         <div className="nav-r">
-          <span className="clock mono" aria-hidden="true">
-            {clock}
-          </span>
           <button
             type="button"
             className="menu-btn"
@@ -91,7 +69,6 @@ export default function Header() {
             <li key={l.href}>
               <Link href={l.href} onClick={() => setOpen(false)}>
                 {l.label}
-                <sup>{l.n}</sup>
               </Link>
             </li>
           ))}

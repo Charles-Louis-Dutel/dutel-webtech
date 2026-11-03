@@ -2,9 +2,9 @@ import SectionHead from "@/components/ui/SectionHead";
 
 export default function Services() {
   return (
-    <section id="services" className="sec" data-folio="02" data-name="Services" aria-labelledby="svc-title">
+    <section id="services" className="sec" data-folio="Services" aria-labelledby="svc-title">
       <div className="wrap">
-        <SectionHead n="02" label="Services" aside="Trois prestations" />
+        <SectionHead label="Services" aside="Trois prestations" />
         <div className="g svc-wrap">
           <div className="svc-intro rv">
             <h2 id="svc-title">
@@ -14,7 +14,6 @@ export default function Services() {
           </div>
           <ol className="svc-list">
             <li className="svc main rv">
-              <span className="n">01</span>
               <h3>
                 Création de <em>sites internet</em>
               </h3>
@@ -27,7 +26,6 @@ export default function Services() {
               <span className="svc-tag mono">Prestation principale</span>
             </li>
             <li className="svc rv">
-              <span className="n">02</span>
               <h3>Maintenance &amp; évolution</h3>
               <span className="ar" aria-hidden="true">
                 →
@@ -38,7 +36,6 @@ export default function Services() {
               </p>
             </li>
             <li className="svc rv">
-              <span className="n">03</span>
               <h3>Développement sur mesure</h3>
               <span className="ar" aria-hidden="true">
                 →

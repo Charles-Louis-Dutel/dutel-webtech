@@ -12,13 +12,12 @@ export default function Method() {
     <section
       id="methode"
       className="sec methode"
-      data-folio="04"
-      data-name="Méthode"
+      data-folio="Méthode"
       data-dark=""
       aria-labelledby="m-title"
     >
       <div className="wrap">
-        <SectionHead n="04" label="Méthode" aside="Quatre étapes" />
+        <SectionHead label="Méthode" aside="Quatre étapes" />
         <h2 id="m-title" className="m-title rv">
           De la première idée <em>à la mise en ligne.</em>
         </h2>
